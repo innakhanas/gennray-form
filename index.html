@@ -304,17 +304,13 @@
     params.append('instagram', A.instagram);
     params.append('telegram', A.telegram);
 
+    // no-cors завжди повертає opaque response — показуємо успіх одразу
     fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
-      .then(() => {
+      .finally(() => {
         document.getElementById('frm').style.display = 'none';
         const s = document.getElementById('success');
         s.classList.add('on');
         document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
-      })
-      .catch(() => {
-        document.getElementById('ldr').style.display = 'none';
-        document.getElementById('bnx').disabled = false;
-        alert('Щось пішло не так. Спробуй ще раз.');
       });
   }
 </script>

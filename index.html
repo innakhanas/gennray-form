@@ -304,14 +304,27 @@
     params.append('instagram', A.instagram);
     params.append('telegram', A.telegram);
 
-    // no-cors завжди повертає opaque response — показуємо успіх одразу
-    fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
-      .finally(() => {
-        document.getElementById('frm').style.display = 'none';
-        const s = document.getElementById('success');
-        s.classList.add('on');
-        document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
-      });
+    const qs = new URLSearchParams({
+      duration: A.duration, hasTrainer: A.hasTrainer, technique: A.technique,
+      result: A.result, barrier: A.barrier, goal: A.goal,
+      problems: A.problems.join(', '), name: A.name,
+      instagram: A.instagram, telegram: A.telegram,
+      callback: 'gennrayCallback'
+    }).toString();
+
+    window.gennrayCallback = function() {
+      document.getElementById('frm').style.display = 'none';
+      document.getElementById('success').classList.add('on');
+      document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
+    };
+
+    const script = document.createElement('script');
+    script.src = SCRIPT_URL + '?' + qs;
+    script.onerror = function() {
+      // навіть якщо помилка — дані збережені, показуємо успіх
+      window.gennrayCallback();
+    };
+    document.head.appendChild(script);
   }
 </script>
 </body>

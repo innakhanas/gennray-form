@@ -232,7 +232,7 @@
 
 <script>
   // ⚠️ ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА ВАШ APPS SCRIPT
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3NnHVrZkW2BVaxgEVlTCTcijDuYoPy4jJg_z7J4JEZV1Z-45Mv93AocBQyfzNbKE/exec';
+  const SCRIPT_URL = 'https://hook.eu2.make.com/95plse6ap65uh7iny4d12gyyfn7ox2ip';
 
   const A = {duration:'',hasTrainer:'',technique:'',result:'',barrier:'',goal:'',problems:[],name:'',instagram:'',telegram:''};
   const PG = {1:12,2:25,3:37,4:50,5:62,6:75,7:87,8:100};
@@ -304,27 +304,32 @@
     params.append('instagram', A.instagram);
     params.append('telegram', A.telegram);
 
-    const qs = new URLSearchParams({
-      duration: A.duration, hasTrainer: A.hasTrainer, technique: A.technique,
-      result: A.result, barrier: A.barrier, goal: A.goal,
-      problems: A.problems.join(', '), name: A.name,
-      instagram: A.instagram, telegram: A.telegram,
-      callback: 'gennrayCallback'
-    }).toString();
-
-    window.gennrayCallback = function() {
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        duration: A.duration,
+        hasTrainer: A.hasTrainer,
+        technique: A.technique,
+        result: A.result,
+        barrier: A.barrier,
+        goal: A.goal,
+        problems: A.problems.join(', '),
+        name: A.name,
+        instagram: A.instagram,
+        telegram: A.telegram
+      })
+    })
+    .then(() => {
       document.getElementById('frm').style.display = 'none';
       document.getElementById('success').classList.add('on');
       document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
-    };
-
-    const script = document.createElement('script');
-    script.src = SCRIPT_URL + '?' + qs;
-    script.onerror = function() {
-      // навіть якщо помилка — дані збережені, показуємо успіх
-      window.gennrayCallback();
-    };
-    document.head.appendChild(script);
+    })
+    .catch(() => {
+      document.getElementById('frm').style.display = 'none';
+      document.getElementById('success').classList.add('on');
+      document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
+    });
   }
 </script>
 </body>

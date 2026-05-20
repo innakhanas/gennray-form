@@ -304,7 +304,7 @@
     params.append('instagram', A.instagram);
     params.append('telegram', A.telegram);
 
-    fetch(SCRIPT_URL, { method: 'POST', body: params })
+    fetch(SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
       .then(() => {
         document.getElementById('frm').style.display = 'none';
         const s = document.getElementById('success');

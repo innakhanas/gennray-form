@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GENN RAY — Опитування</title>
+<title>GENN RAY</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html { font-size: 16px; }
@@ -23,21 +23,15 @@
   .step.active { display: block; }
 
   .q-emoji { font-size: 40px; margin-bottom: 14px; line-height: 1; }
-  .q-text { font-size: 24px; font-weight: 800; line-height: 1.3; margin-bottom: 8px; }
+  .q-text { font-size: 24px; font-weight: 800; line-height: 1.3; margin-bottom: 6px; }
   .q-hint { font-size: 15px; color: #555; margin-bottom: 22px; }
 
   .opts { display: flex; flex-direction: column; gap: 10px; }
 
   .opt {
-    background: #1A1A1A;
-    border: 1.5px solid #272727;
-    border-radius: 14px;
-    padding: 18px 50px 18px 18px;
-    text-align: left;
-    width: 100%;
-    position: relative;
-    cursor: pointer;
-    transition: border-color .15s, background .15s;
+    background: #1A1A1A; border: 1.5px solid #272727; border-radius: 14px;
+    padding: 18px 50px 18px 18px; text-align: left; width: 100%;
+    position: relative; cursor: pointer; transition: border-color .15s, background .15s;
   }
   .opt.sel { background: #1E0F05; border-color: #FF6B2B; }
   .opt-lbl { font-size: 17px; font-weight: 700; color: #F0F0F0; margin-bottom: 3px; }
@@ -45,40 +39,27 @@
   .chk { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); color: #FF6B2B; font-size: 20px; font-weight: 900; display: none; }
   .opt.sel .chk { display: block; }
 
-  /* contacts */
   .prize { background: #1A0A00; border: 1px solid #FF6B2B33; border-radius: 14px; padding: 16px; margin-bottom: 18px; }
   .prize-row { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: #BBB; margin-bottom: 10px; line-height: 1.4; }
   .prize-row:last-child { margin-bottom: 0; }
   .p-icon { font-size: 20px; flex-shrink: 0; }
   .prize-row strong { color: #FF6B2B; }
 
-  input {
-    width: 100%;
-    background: #1A1A1A;
-    border: 1.5px solid #272727;
-    border-radius: 12px;
-    color: #fff;
-    padding: 16px 18px;
-    font-size: 16px;
-    font-family: inherit;
-    margin-bottom: 12px;
-    outline: none;
-    -webkit-appearance: none;
-    display: block;
+  input[type=text] {
+    width: 100%; background: #1A1A1A; border: 1.5px solid #272727; border-radius: 12px;
+    color: #fff; padding: 16px 18px; font-size: 16px; font-family: inherit;
+    margin-bottom: 12px; outline: none; -webkit-appearance: none; display: block;
   }
-  input:focus { border-color: #FF6B2B; }
-  input::placeholder { color: #383838; }
+  input[type=text]:focus { border-color: #FF6B2B; }
+  input[type=text]::placeholder { color: #383838; }
   .privacy { font-size: 13px; color: #333; margin-top: 2px; margin-bottom: 4px; }
-
   .loader { text-align: center; color: #444; font-size: 15px; padding: 12px 0; display: none; }
 
-  /* nav */
   .nav { padding: 20px 20px 40px; display: flex; gap: 10px; margin-top: 24px; border-top: 1px solid #181818; }
   .btn-back { background: #1A1A1A; border: none; color: #666; width: 60px; height: 60px; border-radius: 14px; font-size: 24px; cursor: pointer; flex-shrink: 0; display: none; }
   .btn-next { background: #FF6B2B; border: none; color: #fff; height: 60px; border-radius: 14px; font-size: 17px; font-weight: 800; cursor: pointer; flex: 1; font-family: inherit; transition: opacity .15s; }
   .btn-next:disabled { opacity: 0.25; }
 
-  /* success */
   .success { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 40px 24px; text-align: center; }
   .success.on { display: flex; }
   .s-emoji { font-size: 64px; margin-bottom: 20px; }
@@ -88,41 +69,40 @@
   .b-icon { font-size: 30px; flex-shrink: 0; }
   .b-title { font-size: 16px; font-weight: 800; color: #FF6B2B; margin-bottom: 5px; }
   .b-text { font-size: 14px; color: #777; line-height: 1.4; }
-  .btn-ig { display: block; background: #FF6B2B; color: #fff; text-decoration: none; text-align: center; padding: 18px 32px; border-radius: 14px; font-weight: 800; font-size: 17px; width: 100%; max-width: 400px; }
+  .btn-tg { display: block; background: #FF6B2B; color: #fff; text-decoration: none; text-align: center; padding: 18px 32px; border-radius: 14px; font-weight: 800; font-size: 17px; width: 100%; max-width: 400px; }
   .tagline { font-size: 12px; color: #252525; font-style: italic; margin-top: 28px; }
 </style>
 </head>
 <body>
 
-<!-- SUCCESS -->
 <div class="success" id="success">
   <div class="s-emoji">🎉</div>
   <div class="s-title" id="s-name">Дякуємо!</div>
-  <div class="s-text">Ти в списку учасниць розіграшу<br>3 безкоштовних консультацій.<br><br>Переможців оголосимо в сторіс <strong>@gennray</strong>.</div>
+  <div class="s-text">Ви в списку учасників розіграшу<br>3 безкоштовних консультацій.<br><br>Переможців оголосимо в сторіс <strong>@gennray</strong>.</div>
   <div class="bonus">
     <div class="b-icon">💬</div>
     <div>
-      <div class="b-title">Не хочеш чекати?</div>
-      <div class="b-text">Консультація за <strong>500 грн</strong> замість 1700 грн — тільки для учасниць опитування</div>
+      <div class="b-title">Не хочете чекати?</div>
+      <div class="b-text">Консультація за <strong>500 грн</strong> замість 1700 грн — тільки для учасників опитування</div>
     </div>
   </div>
-  <a class="btn-ig" href="https://instagram.com/gennray" target="_blank">Написати в директ →</a>
+  <a class="btn-tg" href="https://t.me/genn_ray" target="_blank">Написати в Telegram →</a>
   <div class="tagline">"Техніка, техніка і ще раз техніка"</div>
 </div>
 
-<!-- FORM -->
 <div id="frm">
   <div class="topbar">
     <div class="logo">GENN<span>RAY</span></div>
-    <div class="counter" id="ctr">1 / 8</div>
+    <div class="counter" id="ctr">1 / 9</div>
   </div>
-  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:12%"></div></div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:11%"></div></div>
 
   <div class="content" id="cnt">
 
+    <!-- 1 -->
     <div class="step active" data-s="1">
       <div class="q-emoji">🕐</div>
-      <div class="q-text">Скільки часу займаєшся фітнесом?</div>
+      <div class="q-text">Скільки часу ви займаєтесь фітнесом?</div>
       <div class="q-hint">Загальний досвід, навіть з перервами</div>
       <div class="opts">
         <button class="opt" onclick="pick(this,'duration','Тільки починаю (менше 3 місяців)')"><div class="opt-lbl">Тільки починаю</div><div class="opt-sub">менше 3 місяців</div><span class="chk">✓</span></button>
@@ -132,30 +112,34 @@
       </div>
     </div>
 
+    <!-- 2 -->
     <div class="step" data-s="2">
       <div class="q-emoji">🏋️</div>
-      <div class="q-text">Як зараз займаєшся?</div>
+      <div class="q-text">Як ви зараз займаєтесь?</div>
       <div class="q-hint"></div>
       <div class="opts">
         <button class="opt" onclick="pick(this,'hasTrainer','Сама, без тренера')"><div class="opt-lbl">Сама, без тренера</div><div class="opt-sub">самостійно за відео або програмою</div><span class="chk">✓</span></button>
         <button class="opt" onclick="pick(this,'hasTrainer','З онлайн-тренером')"><div class="opt-lbl">З онлайн-тренером</div><div class="opt-sub">ведення дистанційно</div><span class="chk">✓</span></button>
         <button class="opt" onclick="pick(this,'hasTrainer','З офлайн-тренером')"><div class="opt-lbl">З офлайн-тренером</div><div class="opt-sub">особисто в залі</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'hasTrainer','Інше (групові заняття/пілатес/вдома)')"><div class="opt-lbl">Інше</div><div class="opt-sub">групові заняття, пілатес, вдома</div><span class="chk">✓</span></button>
         <button class="opt" onclick="pick(this,'hasTrainer','Поки не займаюся')"><div class="opt-lbl">Поки не займаюся</div><div class="opt-sub">але хочу почати</div><span class="chk">✓</span></button>
       </div>
     </div>
 
+    <!-- 3 -->
     <div class="step" data-s="3">
       <div class="q-emoji">🎯</div>
-      <div class="q-text">Як оцінюєш свою техніку?</div>
+      <div class="q-text">Як ви оцінюєте свою техніку виконання вправ?</div>
       <div class="q-hint"></div>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'technique','Впевнена — знаю що роблю правильно')"><div class="opt-lbl">Впевнена</div><div class="opt-sub">знаю що роблю правильно</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'technique','В основному впевнена — але є сумніви')"><div class="opt-lbl">В основному впевнена</div><div class="opt-sub">але є моменти де сумніваюся</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'technique','Не дуже впевнена — часто сумніваюся')"><div class="opt-lbl">Не дуже впевнена</div><div class="opt-sub">часто сумніваюся чи правильно</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'technique','Впевнена — знаю, що роблю правильно')"><div class="opt-lbl">Впевнена</div><div class="opt-sub">знаю, що роблю правильно</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'technique','В основному впевнена — але є сумніви')"><div class="opt-lbl">В основному впевнена</div><div class="opt-sub">але є моменти, де сумніваюся</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'technique','Не дуже впевнена — часто сумніваюся')"><div class="opt-lbl">Не дуже впевнена</div><div class="opt-sub">часто сумніваюся, чи правильно</div><span class="chk">✓</span></button>
         <button class="opt" onclick="pick(this,'technique','Взагалі не знаю — роблю як у відео')"><div class="opt-lbl">Взагалі не знаю</div><div class="opt-sub">роблю як у відео — і все</div><span class="chk">✓</span></button>
       </div>
     </div>
 
+    <!-- 4 -->
     <div class="step" data-s="4">
       <div class="q-emoji">📈</div>
       <div class="q-text">Є результат від тренувань?</div>
@@ -168,54 +152,68 @@
       </div>
     </div>
 
+    <!-- 5 -->
     <div class="step" data-s="5">
-      <div class="q-emoji">🧱</div>
-      <div class="q-text">Що зупиняє від роботи з тренером?</div>
+      <div class="q-emoji">💭</div>
+      <div class="q-text">Чи розглядаєте роботу з онлайн-тренером?</div>
       <div class="q-hint"></div>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'barrier','Ціна — тренер це дорого')"><div class="opt-lbl">Ціна</div><div class="opt-sub">тренер — це дорого</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'barrier','Не вірю що онлайн працює')"><div class="opt-lbl">Не вірю що онлайн працює</div><div class="opt-sub">здається це не індивідуально</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'barrier','Не розумію що входить у ведення')"><div class="opt-lbl">Не розумію що входить</div><div class="opt-sub">незрозуміло що я отримаю</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'barrier','Вважаю що справляюся сама')"><div class="opt-lbl">Справляюся сама</div><div class="opt-sub">вважаю що тренер не потрібен</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'barrier','Вже шукаю тренера — готова')"><div class="opt-lbl">Вже шукаю тренера</div><div class="opt-sub">готова розпочати</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pickOnline(this,'Так, розглядаю')"><div class="opt-lbl">Так, розглядаю</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pickOnline(this,'Ні')"><div class="opt-lbl">Ні</div><span class="chk">✓</span></button>
       </div>
     </div>
 
+    <!-- 6 — тільки якщо Ні -->
     <div class="step" data-s="6">
-      <div class="q-emoji">🚀</div>
-      <div class="q-text">Яка твоя основна ціль?</div>
+      <div class="q-emoji">🧱</div>
+      <div class="q-text">Чому не розглядаєте онлайн-тренера?</div>
       <div class="q-hint"></div>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'goal','Схуднути — прибрати зайве')"><div class="opt-lbl">Схуднути</div><div class="opt-sub">прибрати зайве</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'goal','Накачати сідниці — форма і обʼєм')"><div class="opt-lbl">Накачати сідниці</div><div class="opt-sub">форма і обʼєм</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'goal','Підтягнути тіло — тонус і рельєф')"><div class="opt-lbl">Підтягнути тіло</div><div class="opt-sub">тонус і рельєф</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="pick(this,'goal','Здоровʼя і самопочуття')"><div class="opt-lbl">Здоровʼя і самопочуття</div><div class="opt-sub">без болю, з енергією</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'barrier','Не вірю, що онлайн дає результат')"><div class="opt-lbl">Не вірю, що онлайн дає результат</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'barrier','Не розумію, як це працює дистанційно')"><div class="opt-lbl">Не розумію, як це працює дистанційно</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'barrier','Думаю, що впораюся сама')"><div class="opt-lbl">Думаю, що впораюся сама</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="pick(this,'barrier','Ціна — це дорого')"><div class="opt-lbl">Ціна — це дорого</div><span class="chk">✓</span></button>
       </div>
     </div>
 
+    <!-- 7 -->
     <div class="step" data-s="7">
+      <div class="q-emoji">🚀</div>
+      <div class="q-text">Яка ваша основна ціль?</div>
+      <div class="q-hint">Можна обрати декілька</div>
+      <div class="opts" id="goal-opts">
+        <button class="opt" onclick="multi(this,'goal','Схуднути — прибрати зайве')"><div class="opt-lbl">Схуднути</div><div class="opt-sub">прибрати зайве</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'goal','Накачати сідниці — форма і обʼєм')"><div class="opt-lbl">Накачати сідниці</div><div class="opt-sub">форма і обʼєм</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'goal','Підтягнути тіло — тонус і рельєф')"><div class="opt-lbl">Підтягнути тіло</div><div class="opt-sub">тонус і рельєф</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'goal','Здоровʼя і самопочуття')"><div class="opt-lbl">Здоровʼя і самопочуття</div><div class="opt-sub">без болю, з енергією</div><span class="chk">✓</span></button>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="step" data-s="8">
       <div class="q-emoji">⚡</div>
       <div class="q-text">Що турбує під час тренувань?</div>
       <div class="q-hint">Можна обрати декілька</div>
       <div class="opts" id="mopts">
-        <button class="opt" onclick="multi(this,'Болить поперек')"><div class="opt-lbl">Болить поперек</div><div class="opt-sub">після або під час тренувань</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="multi(this,'Не відчуваю сідниці')"><div class="opt-lbl">Не відчуваю сідниці</div><div class="opt-sub">тягнуть ноги і квадріцепси</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="multi(this,'Немає прогресу')"><div class="opt-lbl">Немає прогресу</div><div class="opt-sub">стою на місці</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="multi(this,'Зриви в харчуванні')"><div class="opt-lbl">Зриви в харчуванні</div><div class="opt-sub">тримаюся а потім не витримую</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="multi(this,'Сумніваюся в техніці')"><div class="opt-lbl">Сумніваюся в техніці</div><div class="opt-sub">не знаю чи роблю правильно</div><span class="chk">✓</span></button>
-        <button class="opt" onclick="multi(this,'Нічого з цього')"><div class="opt-lbl">Нічого з цього</div><div class="opt-sub">все добре</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Болить поперек')"><div class="opt-lbl">Болить поперек</div><div class="opt-sub">після або під час тренувань</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Не відчуваю сідниці')"><div class="opt-lbl">Не відчуваю сідниці</div><div class="opt-sub">тягнуть ноги і квадріцепси</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Немає прогресу')"><div class="opt-lbl">Немає прогресу</div><div class="opt-sub">стою на місці</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Зриви в харчуванні')"><div class="opt-lbl">Зриви в харчуванні</div><div class="opt-sub">тримаюся, а потім не витримую</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Сумніваюся в техніці')"><div class="opt-lbl">Сумніваюся в техніці</div><div class="opt-sub">не знаю, чи роблю правильно</div><span class="chk">✓</span></button>
+        <button class="opt" onclick="multi(this,'problems','Нічого з цього')"><div class="opt-lbl">Нічого з цього</div><div class="opt-sub">все добре</div><span class="chk">✓</span></button>
       </div>
     </div>
 
-    <div class="step" data-s="8">
+    <!-- 9 -->
+    <div class="step" data-s="9">
       <div class="q-emoji">🎁</div>
-      <div class="q-text">Залиш контакти — і ти в розіграші!</div>
+      <div class="q-text">Останній крок — і ви в розіграші 🎁</div>
       <div class="q-hint" style="margin-bottom:16px"></div>
       <div class="prize">
-        <div class="prize-row"><span class="p-icon">🏆</span><span>3 переможниці отримають <strong>безкоштовну консультацію</strong></span></div>
-        <div class="prize-row"><span class="p-icon">🔥</span><span>Решта — консультація за <strong>500 грн</strong> замість 1700 грн</span></div>
+        <div class="prize-row"><span class="p-icon">🏆</span><span>3 учасниці виграють <strong>безкоштовну консультацію</strong> зі мною</span></div>
+        <div class="prize-row"><span class="p-icon">🔥</span><span>Всі інші отримають знижку — консультація за <strong>500 грн</strong> замість 1700 грн</span></div>
       </div>
-      <input type="text" id="i-name" placeholder="Твоє імʼя" oninput="chkC()" autocomplete="name">
+      <input type="text" id="i-name" placeholder="Ваше імʼя" oninput="chkC()" autocomplete="name">
       <input type="text" id="i-ig" placeholder="Instagram @нікнейм" oninput="chkC()" autocomplete="off">
       <input type="text" id="i-tg" placeholder="Telegram @нікнейм" oninput="chkC()" autocomplete="off">
       <div class="privacy">Дані використовуються тільки для звʼязку та розіграшу</div>
@@ -231,13 +229,19 @@
 </div>
 
 <script>
-  // ⚠️ ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА ВАШ APPS SCRIPT
   const SCRIPT_URL = 'https://hook.eu2.make.com/95plse6ap65uh7iny4d12gyyfn7ox2ip';
+  const TOTAL = 9;
 
-  const A = {duration:'',hasTrainer:'',technique:'',result:'',barrier:'',goal:'',problems:[],name:'',instagram:'',telegram:''};
-  const PG = {1:12,2:25,3:37,4:50,5:62,6:75,7:87,8:100};
-  const FLD = ['','duration','hasTrainer','technique','result','barrier','goal'];
+  const A = {
+    duration:'', hasTrainer:'', technique:'', result:'',
+    onlineConsider:'', barrier:'', goal:[], problems:[],
+    name:'', instagram:'', telegram:''
+  };
+
+  const PG = {1:11,2:22,3:33,4:44,5:55,6:66,7:77,8:88,9:100};
+  const FLD = ['','duration','hasTrainer','technique','result','onlineConsider','barrier','','',''];
   let cur = 1;
+  let skipBarrier = false;
 
   function pick(el, f, v) {
     el.closest('.opts').querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
@@ -246,23 +250,40 @@
     document.getElementById('bnx').disabled = false;
   }
 
-  function multi(el, v) {
-    if (v === 'Нічого з цього') {
-      document.querySelectorAll('#mopts .opt').forEach(o => o.classList.remove('sel'));
+  function pickOnline(el, v) {
+    el.closest('.opts').querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    A.onlineConsider = v;
+    skipBarrier = (v === 'Так, розглядаю');
+    document.getElementById('bnx').disabled = false;
+  }
+
+  function multi(el, field, v) {
+    const isNone = v === 'Нічого з цього';
+    const container = el.closest('.opts');
+
+    if (isNone) {
+      container.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
       el.classList.add('sel');
-      A.problems = ['Нічого з цього'];
+      A[field] = ['Нічого з цього'];
     } else {
-      const none = Array.from(document.querySelectorAll('#mopts .opt')).find(o => o.querySelector('.opt-lbl').textContent.trim() === 'Нічого з цього');
-      if (none) none.classList.remove('sel');
-      A.problems = A.problems.filter(x => x !== 'Нічого з цього');
-      if (el.classList.contains('sel')) { el.classList.remove('sel'); A.problems = A.problems.filter(x => x !== v); }
-      else { el.classList.add('sel'); A.problems.push(v); }
+      const noneBtn = Array.from(container.querySelectorAll('.opt')).find(o => o.querySelector('.opt-lbl').textContent.trim() === 'Нічого з цього');
+      if (noneBtn) noneBtn.classList.remove('sel');
+      A[field] = A[field].filter(x => x !== 'Нічого з цього');
+      if (el.classList.contains('sel')) {
+        el.classList.remove('sel');
+        A[field] = A[field].filter(x => x !== v);
+      } else {
+        el.classList.add('sel');
+        A[field].push(v);
+      }
     }
-    document.getElementById('bnx').disabled = A.problems.length === 0;
+    document.getElementById('bnx').disabled = A[field].length === 0;
   }
 
   function chkC() {
-    const ok = document.getElementById('i-name').value.trim().length > 1 && document.getElementById('i-ig').value.trim().length > 1;
+    const ok = document.getElementById('i-name').value.trim().length > 1 &&
+               document.getElementById('i-ig').value.trim().length > 1;
     document.getElementById('bnx').disabled = !ok;
   }
 
@@ -270,19 +291,38 @@
     document.querySelector('.step.active').classList.remove('active');
     document.querySelector('[data-s="'+n+'"]').classList.add('active');
     document.getElementById('prog').style.width = PG[n] + '%';
-    document.getElementById('ctr').textContent = n + ' / 8';
+    document.getElementById('ctr').textContent = n + ' / ' + TOTAL;
     document.getElementById('bbk').style.display = n > 1 ? 'block' : 'none';
     window.scrollTo(0, 0);
     const btn = document.getElementById('bnx');
-    btn.textContent = n === 8 ? 'Беру участь 🎁' : 'Далі →';
-    if (n < 7) btn.disabled = !A[FLD[n]];
-    else if (n === 7) btn.disabled = A.problems.length === 0;
-    else chkC();
+    btn.textContent = n === TOTAL ? 'Беру участь 🎁' : 'Далі →';
+
+    // check if answer already given
+    if (n === 7) btn.disabled = A.goal.length === 0;
+    else if (n === 8) btn.disabled = A.problems.length === 0;
+    else if (n === 9) chkC();
+    else if (n === 6) btn.disabled = !A.barrier;
+    else if (FLD[n]) btn.disabled = !A[FLD[n]];
+    else btn.disabled = true;
+
     cur = n;
   }
 
-  function nxt() { cur < 8 ? goTo(cur + 1) : submit(); }
-  function prev() { if (cur > 1) goTo(cur - 1); }
+  function nxt() {
+    if (cur === 5 && skipBarrier) {
+      A.barrier = '';
+      goTo(7);
+    } else if (cur < TOTAL) {
+      goTo(cur + 1);
+    } else {
+      submit();
+    }
+  }
+
+  function prev() {
+    if (cur === 7 && skipBarrier) { goTo(5); }
+    else if (cur > 1) { goTo(cur - 1); }
+  }
 
   function submit() {
     A.name = document.getElementById('i-name').value.trim();
@@ -292,18 +332,6 @@
     document.getElementById('bnx').disabled = true;
     document.getElementById('ldr').style.display = 'block';
 
-    const params = new URLSearchParams();
-    params.append('duration', A.duration);
-    params.append('hasTrainer', A.hasTrainer);
-    params.append('technique', A.technique);
-    params.append('result', A.result);
-    params.append('barrier', A.barrier);
-    params.append('goal', A.goal);
-    params.append('problems', A.problems.join(', '));
-    params.append('name', A.name);
-    params.append('instagram', A.instagram);
-    params.append('telegram', A.telegram);
-
     fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -312,20 +340,16 @@
         hasTrainer: A.hasTrainer,
         technique: A.technique,
         result: A.result,
+        onlineConsider: A.onlineConsider,
         barrier: A.barrier,
-        goal: A.goal,
+        goal: A.goal.join(', '),
         problems: A.problems.join(', '),
         name: A.name,
         instagram: A.instagram,
         telegram: A.telegram
       })
     })
-    .then(() => {
-      document.getElementById('frm').style.display = 'none';
-      document.getElementById('success').classList.add('on');
-      document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
-    })
-    .catch(() => {
+    .finally(() => {
       document.getElementById('frm').style.display = 'none';
       document.getElementById('success').classList.add('on');
       document.getElementById('s-name').textContent = 'Дякуємо, ' + A.name.split(' ')[0] + '!';
